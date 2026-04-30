@@ -35,6 +35,6 @@ class SolutionTest {
 
     @Test
     void withSpacesAndPunct() {
-        assertEquals(8, sut.lengthOfLongestSubstring("a b c d!?,"));
+        assertEquals(8, sut.lengthOfLongestSubstring("a b c\td!?,"));
     }
 }
