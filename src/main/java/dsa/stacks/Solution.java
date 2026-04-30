@@ -1,5 +1,7 @@
 package dsa.stacks;
 
+import java.util.ArrayDeque;
+
 /**
  * Challenge 4 (part A): Valid Parentheses.
  *
@@ -29,6 +31,20 @@ public class Solution {
      * <p>Target complexity: O(n) time, O(n) space.
      */
     public boolean isValid(String s) {
-        throw new UnsupportedOperationException("TODO");
+        var stack = new ArrayDeque<Character>();
+
+        for (char c : s.toCharArray())
+        {
+            switch (c) {
+                case '(':
+                case '{':
+                case '[': stack.push(c); break;
+                case ')': if (!stack.isEmpty() && stack.pop() == '(') { break; } else { return false; }
+                case '}': if (!stack.isEmpty() && stack.pop() == '{') { break; } else { return false; }
+                case ']': if (!stack.isEmpty() && stack.pop() == '[') { break; } else { return false; }
+            }
+        }
+
+        return stack.isEmpty();
     }
 }

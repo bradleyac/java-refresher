@@ -1,5 +1,7 @@
 package dsa.stacks;
 
+import java.util.ArrayDeque;
+
 /**
  * Challenge 4 (part B): Min Stack.
  *
@@ -16,24 +18,24 @@ package dsa.stacks;
  * </ul>
  */
 public class MinStack {
-
-    public MinStack() {
-        // TODO: initialize internal data structures
-    }
+    ArrayDeque<Integer> stack = new ArrayDeque<>();
+    ArrayDeque<Integer> mins = new ArrayDeque<>();
 
     public void push(int val) {
-        throw new UnsupportedOperationException("TODO");
+        stack.push(val);
+        mins.push(mins.isEmpty() ? val : Math.min(mins.peek(), val));
     }
 
     public void pop() {
-        throw new UnsupportedOperationException("TODO");
+        stack.pop();
+        mins.pop();
     }
 
     public int top() {
-        throw new UnsupportedOperationException("TODO");
+        return stack.peek();
     }
 
     public int getMin() {
-        throw new UnsupportedOperationException("TODO");
+        return mins.peek();
     }
 }
