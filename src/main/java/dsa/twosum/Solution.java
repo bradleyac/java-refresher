@@ -85,22 +85,24 @@ public class Solution {
                     results.add(List.of(a, b, c));
 
                     // Advance start and end to next distinct number
+                    // Reusing the same number for either b or c here would
+                    // never yield a new solution because nums is sorted.
                     do {
                         start = start + 1;
-                    } while (start < nums.length && nums[start] == b);
+                    } while (start < end && nums[start] == b);
                     do {
                         end = end - 1;
-                    } while (end > 0 && nums[end] == c);
+                    } while (start < end && nums[end] == c);
                 } else if (a + b + c > 0) {
                     // Advance end to next distinct number
                     do {
                         end = end - 1;
-                    } while (nums[end] == c);
+                    } while (start < end && nums[end] == c);
                 } else {
                     // Advance start to next distinct number
                     do {
                         start = start + 1;
-                    } while (nums[start] == b);
+                    } while (start < end && nums[start] == b);
                 }
             }
         }
