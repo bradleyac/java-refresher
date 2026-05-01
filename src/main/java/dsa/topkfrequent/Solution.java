@@ -1,5 +1,9 @@
 package dsa.topkfrequent;
 
+import java.util.*;
+
+import static java.util.Map.Entry.comparingByValue;
+
 /**
  * Challenge 7: Top K Frequent Elements.
  *
@@ -31,6 +35,24 @@ public class Solution {
      * <p>Target complexity: O(n log k) time, O(n) space.
      */
     public int[] topKFrequent(int[] nums, int k) {
-        throw new UnsupportedOperationException("TODO");
+        var occurrenceMap = new HashMap<Integer, Integer>();
+
+        Arrays.stream(nums).forEach(i -> occurrenceMap.merge(i, 1, Integer::sum)); // O(n) time/space
+
+        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(comparingByValue());
+
+        for (var entry : occurrenceMap.entrySet()) { // O(n log k)
+            minHeap.add(entry);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+
+        return minHeap.stream()
+                .toList()
+                .reversed()
+                .stream()
+                .mapToInt(Map.Entry::getKey)
+                .toArray();
     }
 }
